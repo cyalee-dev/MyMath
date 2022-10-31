@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+    <div class="container">
+      <div class="card" style="width: 80vw">
+        <div class="card-body">
+          <h5 class="card-title">
+            Calculate the Max, Average and Standard Deviation
+          </h5>
+          <br>
+          <form action="/result" method="post" class="row">
+            <div class="col-2">
+              <label for="numlistLabel" class="col-auto col-form-label">Enter a list of numbers</label>
+            </div>
+            <div class="col-8">
+              <input type="text" name="numlist" class="form-control" placeholder="1,2,3,4,5,6,7,8,9,10"></input>
+            </div>
+            <div class="col-2">
+              <button type="submit" class="btn btn-primary mb-3">Calculate</button>
+            </div>
+          </form>        
+        </div>
+      </div>
+    </div>
+{%endblock%}

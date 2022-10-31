@@ -1,0 +1,96 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Maximum Number</h5>
+          <p class="card-text">{{max}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Average</h5>
+          <p class="card-text">{{average}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Standard Deviation</h5>
+          <p class="card-text">{{stddev}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="col">
+    <div class="chart-container">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+    var labels = [];
+    var averageThreshold = [];
+    var stddevThreshold = [];
+
+    for (let i = 0; i < {{numlist}}.length; i++){
+      labels.push("")
+      averageThreshold.push({{average}})
+      stddevThreshold.push({{stddev}})
+    }
+
+    const data = {
+      labels: labels,
+      datasets: [
+        {
+          type: "bar",
+          label: "Numbers",
+          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          borderColor: "rgb(255, 99, 132)",
+          borderWidth: 1,
+          data: {{numlist}},
+        },{
+          type: 'line',
+          label: 'Average',
+          backgroundColor: "rgb(255, 179, 71)",
+          borderColor: 'rgb(255, 179, 71)',
+          data: averageThreshold,
+          pointRadius: 0,
+          tension: 0.2
+      },
+      {
+        type: 'line',
+        label: 'Standard Deviation',
+        backgroundColor: "rgb(119, 221, 119)",
+        borderColor: 'rgb(119, 221, 119)',
+        data: stddevThreshold,
+        pointRadius: 0,
+        tension: 0.2
+    },
+      ],
+    };
+
+    const config = {
+      data: data,
+      options: {
+        scales:{
+        x: {
+            display: false
+        }
+    },
+  },
+    };
+</script>
+
+<script>
+  const myChart = new Chart(document.getElementById("myChart"), config);
+</script>
+
+{%endblock%}
